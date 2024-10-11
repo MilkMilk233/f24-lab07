@@ -1,5 +1,5 @@
 package AndrewWebServices;
-
+import java.util.HashMap;
 import java.util.Map;
 
 /*
@@ -9,15 +9,21 @@ import java.util.Map;
  * 
  * Hint: there are two methods you need to implement
  */
-public class InMemoryDatabase /* should there be something here? */ {
+public class InMemoryDatabase extends Database/* should there be something here? */ {
     // Implement your fake database here
-    private final Map<String, Integer> accounts = new java.util.HashMap<>();
+    private Map<String, Integer> accounts;
+    public InMemoryDatabase() {
+        accounts = new HashMap<>();
+        accounts.put("Scotty", 17214);
+    }
 
-    public void setPassword(String accountName, int password) {
+    @Override
+    public int getPassword(String accountName) {
+        return accounts.getOrDefault(accountName, -1);
+    }
+
+    public void addAccount(String accountName, int password) {
         accounts.put(accountName, password);
     }
 
-    public int getPassword(String accountName) {
-        return accounts.getOrDefault(accountName, 0);
-    }
 }
